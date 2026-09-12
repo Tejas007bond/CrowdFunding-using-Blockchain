@@ -1,5 +1,5 @@
 {
-	"id": "06ca2fc7c0760bac43c202acc286bbef",
+	"id": "564f494673dd2e25316f4e5f5071adc3",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.34",
 	"solcLongVersion": "0.8.34+commit.80d5c536",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/BlockAccount.sol": {
-				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.8.2 <0.9.0;\r\n\r\nstruct Fundraiser{\r\n    string name;\r\n    address payable raiser_address;\r\n    string raiser_id_card;\r\n\r\n}\r\n\r\nstruct Donor{\r\n    string name;\r\n    address payable donor_address;\r\n    string donor_id_card;\r\n}"
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\n// A structure to define the fundraiser \nstruct Fundraiser {\n    string name;\n    address payable raiser_address; // Address type that can receive ether\n    string raiser_id_card; // Id card so that the user can be verified\n}\n\n// A structure to define the fundraiser\nstruct Donor {\n    string name;\n    address payable donor_address; // Address type that can send ether\n    string donor_id_card; // Id card so the user can be verified\n}\n\n// A structure to create tickets/campaigns\nstruct FundTicket {\n    string title;\n    string details;\n    bool active_status;\n    uint fund_amount;\n    uint current_collection;\n}"
 			}
 		},
 		"settings": {
@@ -47,11 +47,14 @@
 						"Donor": [
 							15
 						],
+						"FundTicket": [
+							26
+						],
 						"Fundraiser": [
 							8
 						]
 					},
-					"id": 16,
+					"id": 27,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -67,7 +70,7 @@
 								".0"
 							],
 							"nodeType": "PragmaDirective",
-							"src": "33:31:0"
+							"src": "32:31:0"
 						},
 						{
 							"canonicalName": "Fundraiser",
@@ -78,10 +81,10 @@
 									"id": 3,
 									"mutability": "mutable",
 									"name": "name",
-									"nameLocation": "99:4:0",
+									"nameLocation": "137:4:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 8,
-									"src": "92:11:0",
+									"src": "130:11:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -92,7 +95,7 @@
 										"id": 2,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
-										"src": "92:6:0",
+										"src": "130:6:0",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_storage_ptr",
 											"typeString": "string"
@@ -105,10 +108,10 @@
 									"id": 5,
 									"mutability": "mutable",
 									"name": "raiser_address",
-									"nameLocation": "126:14:0",
+									"nameLocation": "163:14:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 8,
-									"src": "110:30:0",
+									"src": "147:30:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -119,7 +122,7 @@
 										"id": 4,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
-										"src": "110:15:0",
+										"src": "147:15:0",
 										"stateMutability": "payable",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address_payable",
@@ -133,10 +136,10 @@
 									"id": 7,
 									"mutability": "mutable",
 									"name": "raiser_id_card",
-									"nameLocation": "154:14:0",
+									"nameLocation": "229:14:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 8,
-									"src": "147:21:0",
+									"src": "222:21:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -147,7 +150,7 @@
 										"id": 6,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
-										"src": "147:6:0",
+										"src": "222:6:0",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_storage_ptr",
 											"typeString": "string"
@@ -157,10 +160,10 @@
 								}
 							],
 							"name": "Fundraiser",
-							"nameLocation": "75:10:0",
+							"nameLocation": "113:10:0",
 							"nodeType": "StructDefinition",
-							"scope": 16,
-							"src": "68:106:0",
+							"scope": 27,
+							"src": "106:184:0",
 							"visibility": "public"
 						},
 						{
@@ -172,10 +175,10 @@
 									"id": 10,
 									"mutability": "mutable",
 									"name": "name",
-									"nameLocation": "204:4:0",
+									"nameLocation": "358:4:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 15,
-									"src": "197:11:0",
+									"src": "351:11:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -186,7 +189,7 @@
 										"id": 9,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
-										"src": "197:6:0",
+										"src": "351:6:0",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_storage_ptr",
 											"typeString": "string"
@@ -199,10 +202,10 @@
 									"id": 12,
 									"mutability": "mutable",
 									"name": "donor_address",
-									"nameLocation": "231:13:0",
+									"nameLocation": "384:13:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 15,
-									"src": "215:29:0",
+									"src": "368:29:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -213,7 +216,7 @@
 										"id": 11,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
-										"src": "215:15:0",
+										"src": "368:15:0",
 										"stateMutability": "payable",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address_payable",
@@ -227,10 +230,10 @@
 									"id": 14,
 									"mutability": "mutable",
 									"name": "donor_id_card",
-									"nameLocation": "258:13:0",
+									"nameLocation": "446:13:0",
 									"nodeType": "VariableDeclaration",
 									"scope": 15,
-									"src": "251:20:0",
+									"src": "439:20:0",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -241,7 +244,7 @@
 										"id": 13,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
-										"src": "251:6:0",
+										"src": "439:6:0",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_storage_ptr",
 											"typeString": "string"
@@ -251,14 +254,161 @@
 								}
 							],
 							"name": "Donor",
-							"nameLocation": "185:5:0",
+							"nameLocation": "339:5:0",
 							"nodeType": "StructDefinition",
-							"scope": 16,
-							"src": "178:97:0",
+							"scope": 27,
+							"src": "332:169:0",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "FundTicket",
+							"id": 26,
+							"members": [
+								{
+									"constant": false,
+									"id": 17,
+									"mutability": "mutable",
+									"name": "title",
+									"nameLocation": "577:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 26,
+									"src": "570:12:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 16,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "570:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 19,
+									"mutability": "mutable",
+									"name": "details",
+									"nameLocation": "595:7:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 26,
+									"src": "588:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 18,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "588:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 21,
+									"mutability": "mutable",
+									"name": "active_status",
+									"nameLocation": "613:13:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 26,
+									"src": "608:18:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_bool",
+										"typeString": "bool"
+									},
+									"typeName": {
+										"id": 20,
+										"name": "bool",
+										"nodeType": "ElementaryTypeName",
+										"src": "608:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bool",
+											"typeString": "bool"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 23,
+									"mutability": "mutable",
+									"name": "fund_amount",
+									"nameLocation": "637:11:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 26,
+									"src": "632:16:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 22,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "632:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 25,
+									"mutability": "mutable",
+									"name": "current_collection",
+									"nameLocation": "659:18:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 26,
+									"src": "654:23:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 24,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "654:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "FundTicket",
+							"nameLocation": "553:10:0",
+							"nodeType": "StructDefinition",
+							"scope": 27,
+							"src": "546:134:0",
 							"visibility": "public"
 						}
 					],
-					"src": "33:242:0"
+					"src": "32:648:0"
 				},
 				"id": 0
 			}
