@@ -4,7 +4,41 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"name": "ticket",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "details",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "active_status",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fund_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "current_collection",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -41,11 +75,11 @@
 			]
 		},
 		"contracts/CrowdFundingContract.sol": {
-			"keccak256": "0x04097e733d2a938cb65afcf6f2e3ecb54dc42226da420af1692ddca29c3db468",
+			"keccak256": "0xd63a9d0c51b1f6e0cb9c870038fff574a8cd913be8031d238d92f2662385f420",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7df12f1a71834fbc5380cb0f9d5f89d3f9e38b270e3610b0f4b37846ab8ad52d",
-				"dweb:/ipfs/QmPabgN9SNp9AvCPvNbmwfHcspyvUL7pYz1Z6bwmNMF1S2"
+				"bzz-raw://07a3086fea0547f7f83de8758f67f2db4b3dadc2c2a9e631368510c3d742fb0e",
+				"dweb:/ipfs/QmSjg4DvyHHJgjaEXammL2DfSFyi2w5Bf1pWiegRQHC2gw"
 			]
 		}
 	},
