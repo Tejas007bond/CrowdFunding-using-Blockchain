@@ -1,50 +1,28 @@
-# Remix IDE Blank Template
+REMIX DEFAULT WORKSPACE
 
-Welcome to your new **Remix IDE Blank Workspace**!
+Remix default workspace is present when:
+i. Remix loads for the very first time 
+ii. A new workspace is created with 'Default' template
+iii. There are no files existing in the File Explorer
 
-This workspace has been generated using the "Blank Template" option in Remix IDE. It starts with only minimal configuration files, giving you full control to build your project from scratch.
+This workspace contains 3 directories:
 
----
+1. 'contracts': Holds three contracts with increasing levels of complexity.
+2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
+3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
 
-## What's Included?
+SCRIPTS
 
-- **`remix.config.json`**: Default Remix IDE workspace configuration.
-- **`.prettierrc.json`**: Basic Prettier formatting rules for code consistency.
+The 'scripts' folder has two typescript files which help to deploy the 'Storage' contract using 'ethers.js' libraries.
 
-No contract files, folders, or sample code are included.
+For the deployment of any other contract, just update the contract name from 'Storage' to the desired contract and provide constructor arguments accordingly 
+in the file `deploy_with_ethers.ts`
 
----
+In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
 
-## Getting Started
+To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
+Output from script will appear in remix terminal.
 
-1. **Create Files & Folders**
-
-   - Add new Solidity files, scripts, or folders as needed for your project.
-   - You can organize your workspace structure in any way you like.
-
-2. **Setup Project Settings** (Optional)
-
-   - Modify `remix.config.json` or add additional configuration files as your project grows.
-
-3. **Write & Compile Smart Contracts**
-
-   - Use the **Solidity Compiler** and **Deploy & Run Transactions** plugins (available in Remix IDE's left sidebar) to develop and test your contracts.
-
-4. **(Optional) Initialize Git**
-
-   - If you checked "Initialize as a Git repository" during workspace creation, you can start committing your code immediately.
-
----
-
-## Useful Resources
-
-- [Remix IDE Documentation](https://remix-ide.readthedocs.io/)
-- [Solidity Language Documentation](https://docs.soliditylang.org/)
-- [Remix IDE Community Forum](https://forum.remix.ethereum.org/)
-
----
-
-Happy coding! 🚀 
-
-_Remix IDE Team_
-
+Please note, require/import is supported in a limited manner for Remix supported modules.
+For now, modules supported by Remix are ethers, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
+For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
