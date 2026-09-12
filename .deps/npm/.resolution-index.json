@@ -1,0 +1,23 @@
+{
+  "contracts/CrowdFundingContract.sol": {
+    "contracts/BlockAccount.sol": "contracts/BlockAccount.sol",
+    "__sources__": {
+      "contracts/CrowdFundingContract.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\nimport \"contracts/BlockAccount.sol\";\n\ncontract CrowdFunding {\n    \n}\n",
+        "file": "contracts/CrowdFundingContract.sol"
+      },
+      "contracts/BlockAccount.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\nstruct Fundraiser {\n    string name;\n    address payable raiser_address;\n    string raiser_id_card;\n}\n\nstruct Donor {\n    string name;\n    address payable donor_address;\n    string donor_id_card;\n}\n\nstruct FundTicket {\n    string title;\n    string details;\n    bool active_status;\n    uint fund_amount;\n    uint current_collection;\n}",
+        "file": "contracts/BlockAccount.sol"
+      }
+    }
+  },
+  "contracts/BlockAccount.sol": {
+    "__sources__": {
+      "contracts/BlockAccount.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\nstruct Fundraiser {\n    string name;\n    address payable raiser_address;\n    string raiser_id_card;\n}\n\nstruct Donor {\n    string name;\n    address payable donor_address;\n    string donor_id_card;\n}\n\nstruct FundTicket {\n    string title;\n    string details;\n    bool active_status;\n    uint fund_amount;\n    uint current_collection;\n}",
+        "file": "contracts/BlockAccount.sol"
+      }
+    }
+  }
+}
