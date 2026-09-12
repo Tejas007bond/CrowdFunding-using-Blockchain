@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CrowdFundingContract.sol": "CrowdFunding"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/BlockAccount.sol": {
+			"keccak256": "0x1c279396fc85442f7eb09c7208925e159f9418a0c579a3ef8f44a8f0829d524b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5d5be0d858e215d2b035e4bd66804fc42f7d676cc42208a7e901e4c6e2768ce4",
+				"dweb:/ipfs/Qmf6R48HAsJzJrRurjfiJLffnuu6JN6LiLP5u2gY8SLFu3"
+			]
+		},
+		"contracts/CrowdFundingContract.sol": {
+			"keccak256": "0x04097e733d2a938cb65afcf6f2e3ecb54dc42226da420af1692ddca29c3db468",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7df12f1a71834fbc5380cb0f9d5f89d3f9e38b270e3610b0f4b37846ab8ad52d",
+				"dweb:/ipfs/QmPabgN9SNp9AvCPvNbmwfHcspyvUL7pYz1Z6bwmNMF1S2"
+			]
+		}
+	},
+	"version": 1
+}
