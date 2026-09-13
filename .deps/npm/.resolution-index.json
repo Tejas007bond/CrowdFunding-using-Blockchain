@@ -3,7 +3,7 @@
     "contracts/BlockAccount.sol": "contracts/BlockAccount.sol",
     "__sources__": {
       "contracts/CrowdFundingContract.sol": {
-        "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\nimport \"contracts/BlockAccount.sol\";\n\n// Creating the smart contract \ncontract CrowdFunding {\n    Fundraiser fundraiserBlock;\n    Donor donorBlock;\n    FundTicket public ticket; // Public so that the donor can see which ticket is active and its details\n}\n",
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\nimport \"contracts/BlockAccount.sol\";\n\n// Creating the smart contract \ncontract CrowdFunding {\n    // Payble because all the funds will go to the fund manager and when the fund ticket is about to close\n    // all the money will go to the fund raiser block\n    address payable fund_manager; // Contract admin\n\n    Fundraiser fundraiserBlock;\n    Donor donorBlock;\n    FundTicket public ticket; // Public so that the donor can see which ticket is active and its details\n\n    // Mapping for registration..\n    uint donor_index;\n    uint fundraiser_index;\n\n    mapping(uint => Fundraiser) fundraiserList;\n    mapping (uint => Donor) donorList;\n\n    constructor() payable {\n        fund_manager = payable(msg.sender);\n        fundraiser_index = 0;\n        donor_index = 0;\n    }\n}\n",
         "file": "contracts/CrowdFundingContract.sol"
       },
       "contracts/BlockAccount.sol": {

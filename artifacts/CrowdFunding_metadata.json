@@ -75,11 +75,11 @@
 			]
 		},
 		"contracts/CrowdFundingContract.sol": {
-			"keccak256": "0xd63a9d0c51b1f6e0cb9c870038fff574a8cd913be8031d238d92f2662385f420",
+			"keccak256": "0xf3c23c51c7a29135d880bf0439a17d08389728d4263a8fc72870dd1e6924f141",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://07a3086fea0547f7f83de8758f67f2db4b3dadc2c2a9e631368510c3d742fb0e",
-				"dweb:/ipfs/QmSjg4DvyHHJgjaEXammL2DfSFyi2w5Bf1pWiegRQHC2gw"
+				"bzz-raw://6032e5e6bf84a3f8140f2a6555f75cc4bed2a77edad52515e07715cbb3b649cd",
+				"dweb:/ipfs/QmRg6nWhfNbRXmw1HdA3MbLi4QBai9q3D4MnKqN3idEMAP"
 			]
 		}
 	},
