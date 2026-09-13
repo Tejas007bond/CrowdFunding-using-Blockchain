@@ -84,6 +84,13 @@
 			},
 			{
 				"inputs": [],
+				"name": "ReleaseFundAmount",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "ticket",
 				"outputs": [
 					{
@@ -157,11 +164,11 @@
 			]
 		},
 		"contracts/CrowdFundingContract.sol": {
-			"keccak256": "0xa9e2bf2b3022534a6e115a1d67a7acfeb201540847d86899cff36f9dca17c79b",
+			"keccak256": "0x43230b9d869dc4a2b809165c2286850f207250cd24adfac1777de7dc8cd456dc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://437ac6d3ce95d48c76fffe57a955096d6f1865875563e611de692f2a5d82b4ae",
-				"dweb:/ipfs/QmWkZkffAubsSmzEfr7X5UNtpRWQxekKHszzYvLfbaYo5t"
+				"bzz-raw://97517ab579330c8a82f17515777c342cc0a19fff15a73b3431409ace63d599c2",
+				"dweb:/ipfs/Qmb5Ux3QLG8kFuah4o1hz1yLk7xog8ihkZ8dREwAYrwERn"
 			]
 		}
 	},
