@@ -22,4 +22,5 @@ struct FundTicket {
     bool active_status;
     uint fund_amount;
     uint current_collection;
+    address payable fundraiser_address;
 }

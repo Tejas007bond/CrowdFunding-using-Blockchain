@@ -25,4 +25,23 @@ contract CrowdFunding {
         fundraiser_index = 0;
         donor_index = 0;
     }
+
+    function FundRaiserRegister(string memory name,string memory user_id_card) payable public {
+        // Initialize the funraiser object
+        fundraiserBlock = Fundraiser(name,payable(msg.sender),user_id_card);
+        fundraiserList[fundraiser_index] = fundraiserBlock;
+        fundraiser_index++;
+    }
+
+    function DonorRegister(string memory name,string memory userIdCard) payable public {
+        // Initialize the donor object
+        donorBlock = Donor(name,payable(msg.sender),userIdCard);
+        donorList[donor_index] = donorBlock;
+        donor_index++;
+    }
+
+    function RaiseFundTicket(string memory title,string memory details,uint fund_amount) payable public {
+        ticket = FundTicket(title,details,true,fund_amount,0,payable(msg.sender));
+        
+    }
 }

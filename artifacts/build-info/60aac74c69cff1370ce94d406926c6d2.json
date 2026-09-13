@@ -1,5 +1,5 @@
 {
-	"id": "564f494673dd2e25316f4e5f5071adc3",
+	"id": "60aac74c69cff1370ce94d406926c6d2",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.34",
 	"solcLongVersion": "0.8.34+commit.80d5c536",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/BlockAccount.sol": {
-				"content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\n// A structure to define the fundraiser \nstruct Fundraiser {\n    string name;\n    address payable raiser_address; // Address type that can receive ether\n    string raiser_id_card; // Id card so that the user can be verified\n}\n\n// A structure to define the fundraiser\nstruct Donor {\n    string name;\n    address payable donor_address; // Address type that can send ether\n    string donor_id_card; // Id card so the user can be verified\n}\n\n// A structure to create tickets/campaigns\nstruct FundTicket {\n    string title;\n    string details;\n    bool active_status;\n    uint fund_amount;\n    uint current_collection;\n}"
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.2 <0.9.0;\n\n// A structure to define the fundraiser \nstruct Fundraiser {\n    string name;\n    address payable raiser_address; // Address type that can receive ether\n    string raiser_id_card; // Id card so that the user can be verified\n}\n\n// A structure to define the fundraiser\nstruct Donor {\n    string name;\n    address payable donor_address; // Address type that can send ether\n    string donor_id_card; // Id card so the user can be verified\n}\n\n// A structure to create tickets/campaigns\nstruct FundTicket {\n    string title;\n    string details;\n    bool active_status;\n    uint fund_amount;\n    uint current_collection;\n    address payable fundraiser_address;\n}"
 			}
 		},
 		"settings": {
@@ -48,13 +48,13 @@
 							15
 						],
 						"FundTicket": [
-							26
+							28
 						],
 						"Fundraiser": [
 							8
 						]
 					},
-					"id": 27,
+					"id": 29,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -162,7 +162,7 @@
 							"name": "Fundraiser",
 							"nameLocation": "113:10:0",
 							"nodeType": "StructDefinition",
-							"scope": 27,
+							"scope": 29,
 							"src": "106:184:0",
 							"visibility": "public"
 						},
@@ -256,13 +256,13 @@
 							"name": "Donor",
 							"nameLocation": "339:5:0",
 							"nodeType": "StructDefinition",
-							"scope": 27,
+							"scope": 29,
 							"src": "332:169:0",
 							"visibility": "public"
 						},
 						{
 							"canonicalName": "FundTicket",
-							"id": 26,
+							"id": 28,
 							"members": [
 								{
 									"constant": false,
@@ -271,7 +271,7 @@
 									"name": "title",
 									"nameLocation": "577:5:0",
 									"nodeType": "VariableDeclaration",
-									"scope": 26,
+									"scope": 28,
 									"src": "570:12:0",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -298,7 +298,7 @@
 									"name": "details",
 									"nameLocation": "595:7:0",
 									"nodeType": "VariableDeclaration",
-									"scope": 26,
+									"scope": 28,
 									"src": "588:14:0",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -325,7 +325,7 @@
 									"name": "active_status",
 									"nameLocation": "613:13:0",
 									"nodeType": "VariableDeclaration",
-									"scope": 26,
+									"scope": 28,
 									"src": "608:18:0",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -352,7 +352,7 @@
 									"name": "fund_amount",
 									"nameLocation": "637:11:0",
 									"nodeType": "VariableDeclaration",
-									"scope": 26,
+									"scope": 28,
 									"src": "632:16:0",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -379,7 +379,7 @@
 									"name": "current_collection",
 									"nameLocation": "659:18:0",
 									"nodeType": "VariableDeclaration",
-									"scope": 26,
+									"scope": 28,
 									"src": "654:23:0",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -398,17 +398,45 @@
 										}
 									},
 									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 27,
+									"mutability": "mutable",
+									"name": "fundraiser_address",
+									"nameLocation": "699:18:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 28,
+									"src": "683:34:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address_payable",
+										"typeString": "address payable"
+									},
+									"typeName": {
+										"id": 26,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "683:15:0",
+										"stateMutability": "payable",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address_payable",
+											"typeString": "address payable"
+										}
+									},
+									"visibility": "internal"
 								}
 							],
 							"name": "FundTicket",
 							"nameLocation": "553:10:0",
 							"nodeType": "StructDefinition",
-							"scope": 27,
-							"src": "546:134:0",
+							"scope": 29,
+							"src": "546:174:0",
 							"visibility": "public"
 						}
 					],
-					"src": "32:648:0"
+					"src": "32:688:0"
 				},
 				"id": 0
 			}
