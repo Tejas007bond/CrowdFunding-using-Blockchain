@@ -7,6 +7,83 @@
 		"abi": [
 			{
 				"inputs": [],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "eth_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "DonateNow",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "userIdCard",
+						"type": "string"
+					}
+				],
+				"name": "DonorRegister",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "user_id_card",
+						"type": "string"
+					}
+				],
+				"name": "FundRaiserRegister",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "details",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fund_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "RaiseFundTicket",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "ticket",
 				"outputs": [
 					{
@@ -33,6 +110,11 @@
 						"internalType": "uint256",
 						"name": "current_collection",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "fundraiser_address",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -67,19 +149,19 @@
 	},
 	"sources": {
 		"contracts/BlockAccount.sol": {
-			"keccak256": "0x1c279396fc85442f7eb09c7208925e159f9418a0c579a3ef8f44a8f0829d524b",
+			"keccak256": "0x13260b002f9111a44bbc0f2cb4175ac572522b82c633512d276304abe7641957",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5d5be0d858e215d2b035e4bd66804fc42f7d676cc42208a7e901e4c6e2768ce4",
-				"dweb:/ipfs/Qmf6R48HAsJzJrRurjfiJLffnuu6JN6LiLP5u2gY8SLFu3"
+				"bzz-raw://3a810dfc33f12ef6be507851522e80bab253e1c3bdfa27147d32b83a20970ec6",
+				"dweb:/ipfs/QmNpSYmsfDaS8mMdUKGPfMymWRtmgzRrTMxJS7yQ2ZEs5e"
 			]
 		},
 		"contracts/CrowdFundingContract.sol": {
-			"keccak256": "0xf3c23c51c7a29135d880bf0439a17d08389728d4263a8fc72870dd1e6924f141",
+			"keccak256": "0xa9e2bf2b3022534a6e115a1d67a7acfeb201540847d86899cff36f9dca17c79b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6032e5e6bf84a3f8140f2a6555f75cc4bed2a77edad52515e07715cbb3b649cd",
-				"dweb:/ipfs/QmRg6nWhfNbRXmw1HdA3MbLi4QBai9q3D4MnKqN3idEMAP"
+				"bzz-raw://437ac6d3ce95d48c76fffe57a955096d6f1865875563e611de692f2a5d82b4ae",
+				"dweb:/ipfs/QmWkZkffAubsSmzEfr7X5UNtpRWQxekKHszzYvLfbaYo5t"
 			]
 		}
 	},

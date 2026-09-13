@@ -42,6 +42,17 @@ contract CrowdFunding {
 
     function RaiseFundTicket(string memory title,string memory details,uint fund_amount) payable public {
         ticket = FundTicket(title,details,true,fund_amount,0,payable(msg.sender));
-        
+    }
+
+    function DonateNow(uint eth_amount) payable public {
+        uint current_funds = ticket.current_collection;
+        current_funds += eth_amount;
+        fund_manager.transfer(msg.value);
+
+        ticket.current_collection = current_funds;
+
+        if(ticket.fund_amount <= ticket.current_collection){
+            ticket.active_status = false;
+        }
     }
 }
