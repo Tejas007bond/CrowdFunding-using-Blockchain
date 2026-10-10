@@ -76,17 +76,29 @@ contract CrowdFunding {
         _;
     }
 
-    // A new ticket can only be raised while no ticket is active
-    // (a finished/released ticket does not block the next one)
+    // A ticket exists as soon as it was raised; a new one can only be
+    // raised after the previous one has been released (funds_released),
+    // otherwise its collected funds would be lost by being overwritten.
     modifier CheckFundTicketStatus() {
         require(
-            ticket.active_status == false,
+            ticket.fundraiser_address == address(0) || funds_released,
             "Crowd Funding Ticket already exist..."
         );
         _;
     }
 
+    // Exists = was ever raised (used by the fund release flow, which must
+    // work even after the goal was reached and active_status went false)
     modifier IsFundTicketExists() {
+        require(
+            ticket.fundraiser_address != address(0),
+            "Crowd Funding Ticket does not exist..."
+        );
+        _;
+    }
+
+    // Active = still accepting donations
+    modifier IsFundTicketActive() {
         require(
             ticket.active_status == true,
             "Crowd Funding Ticket does not exist..."
@@ -166,7 +178,7 @@ contract CrowdFunding {
     function DonateNow(uint wei_amount)
         public
         payable
-        IsFundTicketExists()
+        IsFundTicketActive()
         IsDonorRegisterExists()
         CheckDonateAmount(wei_amount)
         NonReentrant()
@@ -197,6 +209,8 @@ contract CrowdFunding {
         CheckReleaseFundAmount()
         NonReentrant()
     {
+        require(!funds_released, "Funds already released...");
+
         address payable raiser = ticket.fundraiser_address;
         uint amount = ticket.current_collection;
 

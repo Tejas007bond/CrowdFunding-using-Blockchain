@@ -1,0 +1,18 @@
+{
+  "name": "crowdfunding-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Remix workspace for the CrowdFunding contract, with a local compile/test toolchain and a React frontend",
+  "type": "module",
+  "scripts": {
+    "compile": "node scripts/compile.mjs",
+    "test": "node tests/crowdfund.test.mjs",
+    "chain": "ganache --wallet.totalAccounts 10 --chain.chainId 1337"
+  },
+  "devDependencies": {
+    "ethers": "^6.13.0",
+    "ganache": "^7.9.2",
+    "puppeteer-core": "^25.13.0",
+    "solc": "^0.8.26"
+  }
+}
