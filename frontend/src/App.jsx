@@ -54,6 +54,10 @@ export default function App() {
   const [tkDetails, setTkDetails] = useState("");
   const [tkGoal, setTkGoal] = useState("");
   const [donateEth, setDonateEth] = useState("");
+  const [donateInr, setDonateInr] = useState("");
+  const [ethPriceInr, setEthPriceInr] = useState(null);
+  const [priceLoading, setPriceLoading] = useState(true);
+  const [priceError, setPriceError] = useState("");
 
   const hasMetaMask = typeof window !== "undefined" && !!window.ethereum;
   const validAddress =
@@ -183,6 +187,45 @@ export default function App() {
     };
   }, [hasMetaMask]);
 
+  // Fetch the current ETH/INR conversion rate and refresh it every minute.
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchEthPrice = async () => {
+      try {
+        setPriceError("");
+        const response = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr"
+        );
+        if (!response.ok) {
+          throw new Error("Unable to fetch ETH/INR price. Please try again later.");
+        }
+
+        const data = await response.json();
+        const price = data?.ethereum?.inr;
+        if (typeof price !== "number" || !Number.isFinite(price) || price <= 0) {
+          throw new Error("ETH/INR price is currently unavailable.");
+        }
+
+        if (!cancelled) setEthPriceInr(price);
+      } catch (err) {
+        if (!cancelled) {
+          setPriceError(err?.message || "Failed to fetch ETH/INR price.");
+        }
+      } finally {
+        if (!cancelled) setPriceLoading(false);
+      }
+    };
+
+    fetchEthPrice();
+    const intervalId = setInterval(fetchEthPrice, 60000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(intervalId);
+    };
+  }, []);
+
   useEffect(() => {
     refresh();
   }, [refresh]);
@@ -227,7 +270,36 @@ export default function App() {
 
   const donate = () =>
     run("Donate", (cf) => {
-      const value = parseEther(donateEth || "0");
+      const amount = donateEth.trim();
+      if (!amount || !Number.isFinite(Number(amount)) || Number(amount) <= 0) {
+        throw new Error("Enter a valid ETH amount greater than zero.");
+      }
+      const value = parseEther(amount);
+      return cf.DonateNow(value, { value });
+    });
+
+  const donateInrAmount = () =>
+    run("Donate in INR", (cf) => {
+      if (!ethPriceInr) {
+        throw new Error("ETH/INR price is not available. Please try again shortly.");
+      }
+
+      const inrText = donateInr.trim();
+      const inr = Number(inrText);
+      if (!inrText || !Number.isFinite(inr) || inr <= 0) {
+        throw new Error("Enter a valid INR amount greater than zero.");
+      }
+
+      const ethAmount = inr / ethPriceInr;
+      if (!Number.isFinite(ethAmount) || ethAmount <= 0) {
+        throw new Error("INR amount is too small to convert.");
+      }
+
+      const value = parseEther(ethAmount.toFixed(18));
+      if (value <= 0n) {
+        throw new Error("INR amount is too small to convert to ETH.");
+      }
+
       return cf.DonateNow(value, { value });
     });
 
@@ -240,6 +312,9 @@ export default function App() {
   const collected = ticket.current_collection;
   const progress =
     goal > 0n ? Number((collected * 10000n) / goal) / 100 : 0;
+  const filledSegments = Math.ceil(
+    (Math.min(progress, 100) / 100) * PROGRESS_SEGMENTS
+  );
   const ticketExists = ticket.fundraiser_address !== ZERO;
   const isManager =
     account && manager && account.toLowerCase() === manager.toLowerCase();
@@ -247,7 +322,7 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>🌱 CrowdFunding dApp</h1>
+        <h1>The Money Laudry</h1>
         <div className="wallet">
           {account ? (
             <span className="pill">
@@ -309,11 +384,22 @@ export default function App() {
               </span>
             </div>
             <p>{ticket.details}</p>
-            <div className="bar">
-              <div
-                className="bar-fill"
-                style={{ width: `${Math.min(progress, 100)}%` }}
-              />
+            <div
+              className="bar"
+              role="progressbar"
+              aria-label="Fundraising progress"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.min(progress, 100)}
+              aria-valuetext={`${progress.toFixed(1)}% of goal raised`}
+            >
+              {Array.from({ length: PROGRESS_SEGMENTS }, (_, index) => (
+                <span
+                  className={`bar-segment${index < filledSegments ? " filled" : ""}`}
+                  key={index}
+                  aria-hidden="true"
+                />
+              ))}
             </div>
             <p className="meta">
               {formatEther(collected)} / {formatEther(goal)} ETH ({progress.toFixed(1)}%)
@@ -403,6 +489,8 @@ export default function App() {
 
         <section className="card">
           <h2>Donor actions</h2>
+
+          <h3>Donate in ETH</h3>
           <input
             placeholder="Amount in ETH (e.g. 0.5)"
             value={donateEth}
@@ -413,21 +501,83 @@ export default function App() {
             onClick={donate}
             disabled={busy || !account || !isDonor || !ticket.active_status}
           >
-            Donate now
+            Donate ETH
           </button>
+
+          <div style={{ marginTop: "20px" }}>
+            <h3>Donate in INR 🇮🇳</h3>
+            <input
+              placeholder="Amount in rupees (e.g. 500)"
+              value={donateInr}
+              onChange={(e) => setDonateInr(e.target.value)}
+              inputMode="decimal"
+            />
+
+            {priceLoading ? (
+              <p className="hint">Fetching live ETH/INR price...</p>
+            ) : priceError && !ethPriceInr ? (
+              <p className="hint">
+                {priceError} INR conversion is temporarily unavailable.
+              </p>
+            ) : ethPriceInr ? (
+              <>
+                <p className="meta">
+                  1 ETH ≈ ₹{ethPriceInr.toLocaleString("en-IN", {
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
+                {Number(donateInr) > 0 && Number.isFinite(Number(donateInr)) && (
+                  <p className="meta">
+                    You will donate approximately{" "}
+                    {(Number(donateInr) / ethPriceInr).toFixed(8)} ETH
+                  </p>
+                )}
+                {priceError && <p className="hint">Rate refresh warning: {priceError}</p>}
+              </>
+            ) : (
+              <p className="hint">ETH/INR price unavailable.</p>
+            )}
+
+            <button
+              onClick={donateInrAmount}
+              disabled={
+                busy ||
+                !account ||
+                !isDonor ||
+                !ticket.active_status ||
+                !ethPriceInr ||
+                !donateInr.trim() ||
+                !Number.isFinite(Number(donateInr)) ||
+                Number(donateInr) <= 0
+              }
+            >
+              Donate ₹{donateInr.trim() || "0"}
+            </button>
+            <p className="hint">
+              INR is only used to calculate the ETH amount. MetaMask will still
+              request payment in ETH; this demo does not accept UPI or card payments.
+            </p>
+          </div>
+
           <p className="hint">
             {!isDonor
               ? "Register as donor first."
               : !ticket.active_status
               ? "No open ticket to donate to."
-              : "Donation is forwarded straight to the fund manager."}
+              : "Choose ETH or enter a rupee amount. The INR amount is converted to ETH using the displayed rate."}
           </p>
 
           <h3>Fund manager</h3>
           <button
             className="danger"
             onClick={release}
-            disabled={busy || !isManager || !ticketExists || fundsReleased || collected === 0n}
+            disabled={
+              busy ||
+              !isManager ||
+              !ticketExists ||
+              fundsReleased ||
+              collected === 0n
+            }
           >
             Release {collected > 0n ? formatEther(collected) : ""} ETH to fundraiser
           </button>
@@ -479,6 +629,7 @@ export default function App() {
 }
 
 const ZERO = "0x0000000000000000000000000000000000000000";
+const PROGRESS_SEGMENTS = 24;
 
 function short(addr) {
   if (!addr) return "";

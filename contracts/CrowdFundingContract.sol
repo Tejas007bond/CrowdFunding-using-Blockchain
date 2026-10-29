@@ -7,7 +7,7 @@ import "contracts/BlockAccount.sol";
 contract CrowdFunding {
     // Payable because all the funds will go to the fund manager and when the
     // fund ticket is about to close all the money will go to the fund raiser block.
-    //
+    
     // UNIT CONVENTION: every amount in this contract (fund_amount,
     // current_collection, donations, releases) is denominated in **wei**.
     // The frontend converts ETH to wei with ethers.parseEther() before calling.
